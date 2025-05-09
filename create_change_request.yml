@@ -16,38 +16,17 @@
         priority: "{{ priority }}"
         risk: "{{ risk }}"
         impact: "{{ impact }}"
-        # other:
-        #   expected_start: "{{ expected_start }}" # 2021-06-07
       register: snow_var
 
     - name: Saving the change request number for later 
       ansible.builtin.set_stats:
-        cr_number: "{{ snow_var.record.number }}"
-
-    - name: Printing the cr_number for debugging
-      debug: 
-        var: cr_number
+        data:
+          cr_number: "{{ snow_var.record.number }}"
 
     - name: Extract instance_name from description
       ansible.builtin.set_stats:
-        instance_name: "{{ description | regex_search('instance_name: ([^ ]+)', '\\1') }}"
-
-    - name: Extract instance_type from description
-      ansible.builtin.set_stats:
-        instance_type: "{{ description | regex_search('instance_type: ([^ ]+)', '\\1') }}"
-
-    - name: Extract region from description
-      ansible.builtin.set_stats:
-        region: "{{ description | regex_search('region: ([^,]+)', '\\1') }}"
-
-    - name: Extract key_name from description
-      ansible.builtin.set_stats:
-        key_name: "{{ description | regex_search('key_name: ([^,]+)', '\\1') }}"
-
-    - name: Debug extracted values
-      ansible.builtin.debug:
-        msg:
-          - "Extracted instance_name: {{ instance_name }}"
-          - "Extracted instance_type: {{ instance_type }}"
-          - "Extracted region: {{ region }}"
-          - "Extracted key_name: {{ key_name }}"
+        data: 
+          instance_name: "{{ description | regex_search('instance_name: ([^ ]+)', '\\1') }}"
+          instance_type: "{{ description | regex_search('instance_type: ([^ ]+)', '\\1') }}"
+          region: "{{ description | regex_search('region: ([^,]+)', '\\1') }}"
+          key_name: "{{ description | regex_search('key_name: ([^,]+)', '\\1') }}"
