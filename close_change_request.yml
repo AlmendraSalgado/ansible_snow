@@ -1,0 +1,17 @@
+---
+- name: Close Change Request
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Close change_request
+      servicenow.itsm.change_request:
+        instance:
+          host: "{{ SN_HOST }}" # Instance info provided by custom credential
+          username: "{{ SN_USERNAME }}"
+          password: "{{ SN_PASSWORD }}"
+        state: closed
+        close_code: "{{ close_code }}"
+        close_notes: "{{ close_notes }}"
+        assignment_group: "{{ assignment_group }}"
+        number: "{{ cr_number }}"
