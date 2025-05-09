@@ -22,9 +22,7 @@
 
     - name: Saving the change request number for later 
       ansible.builtin.set_stats:
-        data:
-          cr_number: "{{ snow_var.record.number }}"
-        per_host: no
+        cr_number: "{{ snow_var.record.number }}"
 
     - name: Printing the cr_number for debugging
       debug: 
