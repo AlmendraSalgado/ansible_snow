@@ -8,10 +8,6 @@
   tasks:
     - name: Creating change request
       servicenow.itsm.change_request:
-        instance:
-          host: "{{ SN_HOST }}" # Instance info provided by custom credential
-          username: "{{ SN_USERNAME }}"
-          password: "{{ SN_PASSWORD }}"
         type: "{{ cr_type }}"
         state: new
         requested_by: "{{ requested_by }}"
