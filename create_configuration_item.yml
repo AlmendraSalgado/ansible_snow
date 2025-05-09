@@ -1,0 +1,29 @@
+---
+- name: Creating a Configuration Item (CMDB)
+  hosts: localhost
+  gather_facts: false
+  
+  tasks:
+
+    - name: Create a configuration item
+      servicenow.itsm.configuration_item:
+        name: "{{ instance_name }}"
+        state: present
+        short_description: RHEL9 on EC2 instance 
+        serial_number: "{{ instance_id }}"
+        asset_tag: "{{ ami_id }}"
+        sys_class_name: cmdb_ci_linux_server
+        assigned_to: infra_team
+        environment: testing
+        install_status: installed
+        category: Virtualization
+        other:
+          model_number: "{{ instance_id }}"
+          assignment_group: infra_team
+        ip_address: "{{ public_ip }}"
+        operational_status: operational
+      register: server_info
+
+    - name: print the result
+      ansible.builtin.debug:
+        var: server_info
