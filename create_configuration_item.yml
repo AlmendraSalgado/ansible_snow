@@ -1,6 +1,6 @@
 ---
 - name: Creating a Configuration Item (CMDB)
-  hosts: localhost
+  hosts: all
   gather_facts: false
   
   tasks:
@@ -23,7 +23,9 @@
         ip_address: "{{ public_ip }}"
         operational_status: operational
       register: server_info
+      delegate_to: localhost
 
     - name: print the result
       ansible.builtin.debug:
         var: server_info
+      delegate_to: localhost
