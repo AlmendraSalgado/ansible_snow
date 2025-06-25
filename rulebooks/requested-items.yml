@@ -9,7 +9,7 @@
     - name: Trigger job on RITM creation
       condition: true
       action:
-        run_workflow_job_template:
+        run_workflow_template:
           name: "New RHEL Server RITM from ServiceNow"
           organization: "Default"
           job_args:
