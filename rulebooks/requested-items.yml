@@ -20,5 +20,5 @@
           organization: Default
           job_args:
             extra_vars:
-              instance_name: "{{ event.payload['variables']['name_of_the_new_vm'] || default('dummy') }}-{{ event.payload['number'] }}"
+              instance_name: "{{ event.payload['variables']['name_of_the_new_vm'] | default('dummy') }}-{{ event.payload['number'] }}"
               request_item_number: "{{ event.payload['number'] }}"
