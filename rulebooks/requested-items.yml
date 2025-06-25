@@ -6,6 +6,12 @@
         port: 5000  # This is for local testing, Event Stream handles this in AAP
 
   rules:
+    - name: Check event payload
+      condition: true
+      action:
+        debug:
+          msg: "{{ event.payload }}"
+
     - name: Provision VM
       condition: true
       action:
@@ -14,4 +20,4 @@
           organization: Default
           job_args:
             extra_vars:
-              instance_name: "{{ event.payload['variables']['sn_vm_name'] }}"
+              instance_name: "{{ event.payload['variables']['sn_vm_name'] || default('dummy') }}"
