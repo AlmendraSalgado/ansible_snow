@@ -1,0 +1,17 @@
+---
+- name: Trigger AAP job template from ServiceNow RITM event 
+  hosts: all
+  sources:
+    - ansible.eda.webhook:
+        port: 5000  # This is for local testing, Event Stream handles this in AAP
+
+  rules:
+    - name: Trigger job on RITM creation
+      #condition: event.payload.type == "incident.created"
+      action:
+        run_job_template:
+          name: "New RHEL Server RITM from ServiceNow"
+          organization: "Default"
+          job_args:
+            extra_vars:
+              instance_name: "{{ event.payload['variables']['sn_vm_name'] }}"
