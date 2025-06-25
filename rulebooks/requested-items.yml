@@ -7,7 +7,7 @@
 
   rules:
     - name: Trigger job on RITM creation
-      #condition: event.payload.type == "incident.created"
+      condition: true
       action:
         run_job_template:
           name: "New RHEL Server RITM from ServiceNow"
