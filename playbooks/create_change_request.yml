@@ -1,0 +1,24 @@
+---
+- name: Create a Change Request in ServiceNow
+  hosts: localhost
+  gather_facts: false
+  vars:
+    requested_by: 'Ansible Automation Platform'
+    
+  tasks:
+    - name: Creating change request
+      servicenow.itsm.change_request:
+        type: "{{ cr_type }}"
+        state: new
+        requested_by: "{{ requested_by }}"
+        short_description: "{{ short_description }}" # Install Cisco Switch
+        description: "{{ description }}" #Please install new Cat. 6500 in Data center 01
+        priority: "{{ priority }}"
+        risk: "{{ risk }}"
+        impact: "{{ impact }}"
+      register: snow_var
+
+    - name: Saving the change request number for later 
+      ansible.builtin.set_stats:
+        data:
+          cr_number: "{{ snow_var.record.number }}"
