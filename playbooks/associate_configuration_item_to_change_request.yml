@@ -1,0 +1,22 @@
+- name: Associate configuration item to the change request
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - ansible.builtin.debug:
+        var: ci_number
+
+    - name: Get sys_id for RITM number
+      servicenow.itsm.api_info:
+        resource: change_request
+        sysparm_query: numberSTARTSWITH{{ cr_number }}
+      register: cr_lookup
+
+
+    - name: Associate change request to the requested item
+      servicenow.itsm.api:
+        resource: change_request
+        action: patch
+        sys_id: "{{ cr_lookup.record[0].sys_id }}"
+        data:
+          cmdb_ci: "{{ ci_number }}"
