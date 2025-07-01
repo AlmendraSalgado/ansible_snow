@@ -13,7 +13,7 @@
     #       msg: "{{ event.payload }}"
 
     - name: Provision VM
-      condition: event.payload.operation == "insert"
+      condition: true
       action:
         run_workflow_template:
           name: New RHEL Server RITM from ServiceNow
