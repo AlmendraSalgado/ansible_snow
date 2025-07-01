@@ -33,3 +33,4 @@
       ansible.builtin.set_stats:
         data:
           ci_number: "{{ server_info.sys_id }}"
+        per_host: false

@@ -22,7 +22,8 @@
       ansible.builtin.set_stats:
         data:
           cr_number: "{{ snow_var.record.number }}"
+        per_host: false
     
     - ansible.builtin.debug:
-        var: data.cr_number
+        var: cr_number
   
