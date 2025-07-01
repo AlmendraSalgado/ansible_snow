@@ -24,6 +24,4 @@
           cr_number: "{{ snow_var.record.number }}"
         per_host: false
     
-    - ansible.builtin.debug:
-        var: cr_number
   
