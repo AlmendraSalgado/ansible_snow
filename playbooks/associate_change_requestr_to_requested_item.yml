@@ -6,7 +6,7 @@
     - name: Associate change request to the requested item
       servicenow.itsm.api:
         resource: sc_req_item
-        action: post
+        action: patch
         sys_id: "{{ request_item_number }}"
         data:
           u_change_request: "{{ cr_number }}"
