@@ -28,3 +28,8 @@
       ansible.builtin.debug:
         var: server_info
       delegate_to: localhost
+
+    - name: Saving the configuration item number for later 
+      ansible.builtin.set_stats:
+        data:
+          ci_number: "{{ server_info.sys_id }}"
