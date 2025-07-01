@@ -24,5 +24,5 @@
           cr_number: "{{ snow_var.record.number }}"
     
     - ansible.builtin.debug:
-        var: cr_number
+        var: data.cr_number
   
